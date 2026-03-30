@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: ruta-productos
+              uri: http://localhost:8081
+              predicates:
+                ##Condición si se cumple esta ruta
+                - Path=/api/productos/**
+              filters:
+                ##Elimina partes de la ruta antes de reenviarla
+                ##Elimina las 2 primeras partes de la ruta o del path
+                - StripPrefix=2
+
+            - id: ruta-pedidos
+              uri: http://localhost:8082
+              predicates:
+                ##Condición si se cumple esta ruta
+                - Path=/api/pedidos/**
+              filters:
+                ##Elimina partes de la ruta antes de reenviarla
+                ##Elimina las 2 primeras partes de la ruta o del path
+                - StripPrefix=2
+
+
+
+

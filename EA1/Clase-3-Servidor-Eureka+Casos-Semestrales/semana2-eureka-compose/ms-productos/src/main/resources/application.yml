@@ -1,0 +1,41 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: ms-productos
+
+  datasource:
+    # Base de datos en memoria para demo rápida
+    url: jdbc:h2:mem:productosdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      # Crea y destruye tablas en cada inicio
+      ddl-auto: create-drop
+    show-sql: true
+
+  h2:
+    console:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      # URL del servidor Eureka
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

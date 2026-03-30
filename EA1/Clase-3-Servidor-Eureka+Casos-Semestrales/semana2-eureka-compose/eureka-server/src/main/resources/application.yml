@@ -1,0 +1,26 @@
+server:
+  # Puerto del servidor Eureka
+  port: ${SERVER_PORT:8761}
+
+spring:
+  application:
+    # Nombre de la aplicación
+    name: eureka-server
+
+eureka:
+  client:
+    # El servidor Eureka no necesita registrarse a sí mismo
+    register-with-eureka: false
+
+    # El servidor no necesita ir a buscar el registro a otro Eureka
+    fetch-registry: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # Exponemos health para que Docker pueda verificar si el servicio está vivo
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
